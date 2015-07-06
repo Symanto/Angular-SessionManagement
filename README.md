@@ -26,8 +26,8 @@ angular.module("Application.Root", [
     // Define the client id of your application that is needed for the OAuth2.0 Authentication
     sessionManagementOptions.clientId: "oAuthIdTest";
 
-    // OPTION CONFIGURATION
-    // --------------------
+    // OPTIONAL CONFIGURATION
+    // ----------------------
     // Add the Symanto Loading Indicator Service to the Session Management
     sessionManagementOptions.loadingIndicatorService = LoadingIndicatorService;
     // Add a prefix to the the access and refresh token cookies
