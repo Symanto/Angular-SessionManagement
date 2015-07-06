@@ -71,7 +71,7 @@ sessionManagement.service("SessionService", function ($http, $state, $q, User, l
 
         // Start loading indicator if available
         if (sessionManagementOptions.loadingIndicatorService != undefined)
-            sessionManagementOptions.laodingIndicatorService.startOperation();
+            sessionManagementOptions.loadingIndicatorService.startOperation();
 
         // In this case the 'x-www-form-urlencoded' type has to be used because of OAuth
         $http({
@@ -86,14 +86,14 @@ sessionManagement.service("SessionService", function ($http, $state, $q, User, l
 
                 // Stop loading indicator if available
                 if (sessionManagementOptions.loadingIndicatorService != undefined)
-                    sessionManagementOptions.laodingIndicatorService.finishOperation();
+                    sessionManagementOptions.loadingIndicatorService.finishOperation();
 
                 deferred.resolve(success.data);
             },
             function (error) {
                 // Stop loading indicator if available
                 if (sessionManagementOptions.loadingIndicatorService != undefined)
-                    sessionManagementOptions.laodingIndicatorService.finishOperation();
+                    sessionManagementOptions.loadingIndicatorService.finishOperation();
 
                 deferred.reject({"loginError":-1})
             }
@@ -125,7 +125,7 @@ sessionManagement.service("SessionService", function ($http, $state, $q, User, l
         else {
             // Start loading indicator if available
             if (sessionManagementOptions.loadingIndicatorService != undefined)
-                sessionManagementOptions.laodingIndicatorService.startOperation();
+                sessionManagementOptions.loadingIndicatorService.startOperation();
 
             $http({
                 url: "/api/user/me",
@@ -134,7 +134,7 @@ sessionManagement.service("SessionService", function ($http, $state, $q, User, l
                 function (success) {
                     // Stop loading indicator if available
                     if (sessionManagementOptions.loadingIndicatorService != undefined)
-                        sessionManagementOptions.laodingIndicatorService.finishOperation();
+                        sessionManagementOptions.loadingIndicatorService.finishOperation();
 
                     User.set(success.data);
                     deferred.resolve(success.data);
@@ -142,7 +142,7 @@ sessionManagement.service("SessionService", function ($http, $state, $q, User, l
                 function (error) {
                     // Stop loading indicator if available
                     if (sessionManagementOptions.loadingIndicatorService != undefined)
-                        sessionManagementOptions.laodingIndicatorService.finishOperation();
+                        sessionManagementOptions.loadingIndicatorService.finishOperation();
 
                     deferred.reject({"setUserError": -1})
                 }
@@ -174,20 +174,20 @@ sessionManagement.factory('SessionTokenInterceptor', function ($q, $injector, lo
     var retryRequest = function(config) {
         // Start loading indicator if available
         if (sessionManagementOptions.loadingIndicatorService != undefined)
-            sessionManagementOptions.laodingIndicatorService.startOperation();
+            sessionManagementOptions.loadingIndicatorService.startOperation();
 
         $injector.get("$http")(config.request.config).then(
             function (resp) {
                 // Stop loading indicator if available
                 if (sessionManagementOptions.loadingIndicatorService != undefined)
-                    sessionManagementOptions.laodingIndicatorService.finishOperation();
+                    sessionManagementOptions.loadingIndicatorService.finishOperation();
 
                 config.deferred.resolve(resp);
             },
             function (err) {
                 // Stop loading indicator if available
                 if (sessionManagementOptions.loadingIndicatorService != undefined)
-                    sessionManagementOptions.laodingIndicatorService.finishOperation();
+                    sessionManagementOptions.loadingIndicatorService.finishOperation();
 
                 config.deferred.reject();
             }
@@ -233,7 +233,7 @@ sessionManagement.factory('SessionTokenInterceptor', function ($q, $injector, lo
 
                 // Start loading indicator if available
                 if (sessionManagementOptions.loadingIndicatorService != undefined)
-                    sessionManagementOptions.laodingIndicatorService.startOperation();
+                    sessionManagementOptions.loadingIndicatorService.startOperation();
 
                 $injector.get("$http")({
                     url: "/api/account/login",
@@ -244,7 +244,7 @@ sessionManagement.factory('SessionTokenInterceptor', function ($q, $injector, lo
                     function(success) {
                         // Stop loading indicator if available
                         if (sessionManagementOptions.loadingIndicatorService != undefined)
-                            sessionManagementOptions.laodingIndicatorService.finishOperation();
+                            sessionManagementOptions.loadingIndicatorService.finishOperation();
 
                         // Successfully refreshed the token. Reset the cookies
                         localStorageService.set('access_token', success.data.access_token);
@@ -263,7 +263,7 @@ sessionManagement.factory('SessionTokenInterceptor', function ($q, $injector, lo
                     function(error) {
                         // Stop loading indicator if available
                         if (sessionManagementOptions.loadingIndicatorService != undefined)
-                            sessionManagementOptions.laodingIndicatorService.finishOperation();
+                            sessionManagementOptions.loadingIndicatorService.finishOperation();
 
                         deferred.reject();
                         isRefreshingTheToken = false;
