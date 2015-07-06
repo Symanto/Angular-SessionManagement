@@ -38,7 +38,8 @@ sessionManagement.value('sessionManagementOptions', {
     tokenPrefix: "",
     clientId: "",
     loadingIndicatorService: undefined,
-    loginStateName: "login"
+    loginStateName: "login",
+	useTokenInterceptor: true
 });
 
 /**
@@ -150,6 +151,9 @@ sessionManagement.service("SessionService", function ($http, $state, $q, User, l
  * Interceptor that adds the access token to every outgoing request and handles the refresh of it
  */
 sessionManagement.factory('SessionTokenInterceptor', function ($q, $injector, localStorageService, sessionManagementOptions){
+
+	if (sessionManagementOptions.useTokenInterceptor == false)
+		return;
 
     var requestQueue = [];
     var isRefreshingTheToken = false;
