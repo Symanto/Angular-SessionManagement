@@ -1,5 +1,5 @@
 // Define the SessionManagement module
-angular.module("Symanto.SessionManagement", [])
+angular.module("Symanto.SessionManagement", []) 
     .config(function ($httpProvider) {
         $httpProvider.interceptors.push('SessionTokenInterceptor');
     }
