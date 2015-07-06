@@ -21,7 +21,7 @@ To add this module load them into your project and inject them into your root mo
 angular.module("Application.Root", [
     "LocalStorageModule",
     "Symanto.SessionManagement",
-    "Symanto.LoadingIndicatorService"
+    "Symanto.LoadingIndicator"
 ]).run(function(sessionManagementOptions, LoadingIndicatorService) {
 
     // REQUIRED CONFIGURATION
