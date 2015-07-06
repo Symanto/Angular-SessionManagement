@@ -1,11 +1,29 @@
 // Define the SessionManagement module
-angular.module("Symanto.SessionManagement", ["ngCookies"])
-    .config(['$httpProvider', function ($httpProvider) {
+angular.module("Symanto.SessionManagement", [])
+    .config(function ($httpProvider) {
         $httpProvider.interceptors.push('SessionTokenInterceptor');
-    }]);
+    }
+);
 
 // Store the module within a variable
 var sessionManagement = angular.module("Symanto.SessionManagement");
+
+// ----------------------------------------------------------------------------------------------------
+// Options
+// ----------------------------------------------------------------------------------------------------
+
+// Define configuration values for the module
+sessionManagement.value('sessionManagementOptions', {
+    loginEndpoint: "/api/account/login",
+    tokenPrefix: "",
+    clientId: "",
+    loadingIndicatorService: undefined,
+    loginStateName: "login"
+});
+
+// ----------------------------------------------------------------------------------------------------
+// User factory
+// ----------------------------------------------------------------------------------------------------
 
 /**
  * User factory that holds the current user's data
@@ -32,15 +50,9 @@ sessionManagement.factory("User", function() {
     };
 });
 
-// Define configuration values for the module
-sessionManagement.value('sessionManagementOptions', {
-    loginEndpoint: "/api/account/login",
-    tokenPrefix: "",
-    clientId: "",
-    loadingIndicatorService: undefined,
-    loginStateName: "login",
-	useTokenInterceptor: true
-});
+// ----------------------------------------------------------------------------------------------------
+// Session Service
+// ----------------------------------------------------------------------------------------------------
 
 /**
  * Service that handles log in / out mechanism
@@ -147,13 +159,14 @@ sessionManagement.service("SessionService", function ($http, $state, $q, User, l
     };
 });
 
+// ----------------------------------------------------------------------------------------------------
+// SessionTokenInterceptor
+// ----------------------------------------------------------------------------------------------------
+
 /**
  * Interceptor that adds the access token to every outgoing request and handles the refresh of it
  */
 sessionManagement.factory('SessionTokenInterceptor', function ($q, $injector, localStorageService, sessionManagementOptions){
-
-	if (sessionManagementOptions.useTokenInterceptor == false)
-		return;
 
     var requestQueue = [];
     var isRefreshingTheToken = false;
