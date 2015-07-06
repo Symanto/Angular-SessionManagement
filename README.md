@@ -16,8 +16,21 @@ angular.module("Application.Root", [
     "Symanto.LoadingIndicatorService"
 ]).run(function(sessionManagementOptions, LoadingIndicatorService) {
 
-    // Add the Symanto Loading Indicator Service to the Http Service
+    // REQUIRED CONFIGURATION
+    // ----------------------
+    // Define the login API endpoint
+    sessionManagementOptions.loginEndpoint: "/api/account/login",
+    // Define the client id of your application that is needed for the OAuth2.0 Authentication
+    sessionManagementOptions.clientId: "oAuthIdTest";
+
+    // OPTION CONFIGURATION
+    // --------------------
+    // Add the Symanto Loading Indicator Service to the Session Management
     sessionManagementOptions.loadingIndicatorService = LoadingIndicatorService;
+    // Add a prefix to the the access and refresh token cookies
+    sessionManagementOptions.tokenPrefix: "my-project_";
+    // Set the name of the login state to that the module should navigate after the logout
+    sessionManagementOptionsloginStateName: "login"
 });
 ```
 
