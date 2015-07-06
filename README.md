@@ -1,7 +1,7 @@
 # Angular-SessionManagement
 ## Installation
 ###Bower
-The easiest way to install the HttpService is by including the bower package to your solution
+The easiest way to install the SessionManagement module is by including the bower package to your solution
 ```shell
 bower install symanto-angular-sessionmanagement --save
 ```
